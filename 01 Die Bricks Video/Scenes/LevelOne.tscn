@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://bv7as36u8h8q"]
+
+[ext_resource type="Texture2D" uid="uid://dvbxobkww24t4" path="res://Textures/paddle.png" id="1_suu84"]
+[ext_resource type="Texture2D" uid="uid://82ussl883phc" path="res://Textures/ball.png" id="2_654y5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_psqjr"]
+size = Vector2(800, 8)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0a0s1"]
+friction = 0.0
+bounce = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ciy8h"]
+size = Vector2(12, 12)
+
+[node name="World" type="Node2D"]
+
+[node name="Paddle" type="CharacterBody2D" parent="."]
+position = Vector2(320, 288)
+
+[node name="Sprite" type="Sprite2D" parent="Paddle"]
+scale = Vector2(2, 2)
+texture = ExtResource("1_suu84")
+metadata/_edit_lock_ = true
+
+[node name="Collision" type="CollisionShape2D" parent="Paddle"]
+shape = SubResource("RectangleShape2D_psqjr")
+
+[node name="Ball" type="RigidBody2D" parent="."]
+position = Vector2(320, 256)
+physics_material_override = SubResource("PhysicsMaterial_0a0s1")
+gravity_scale = 0.0
+linear_velocity = Vector2(200, -200)
+
+[node name="Sprite" type="Sprite2D" parent="Ball"]
+scale = Vector2(4, 4)
+texture = ExtResource("2_654y5")
+metadata/_edit_lock_ = true
+
+[node name="Collision" type="CollisionShape2D" parent="Ball"]
+shape = SubResource("RectangleShape2D_ciy8h")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[node name="Walls" type="StaticBody2D" parent="."]
+position = Vector2(0, -1)
+
+[node name="Collision" type="CollisionPolygon2D" parent="Walls"]
+polygon = PackedVector2Array(-1, 406, -73, 406, -74, -73, 696, -71, 695, 410, 644, 409, 640, 1, 1, 2)
